@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="16dp" 
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <GridLayout android:columnCount="2" android:rowCount="2" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <Button android:id="@+id/btnFeed" android:text="Feed" android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+        <Button android:id="@+id/btnPost" android:text="Post Item" android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+        <Button android:id="@+id/btnMatches" android:text="Matches" android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+        <Button android:id="@+id/btnAbout" android:text="About Us" android:layout_width="0dp" android:layout_height="120dp" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+    </GridLayout>
+</LinearLayout>
