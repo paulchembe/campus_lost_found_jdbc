@@ -1,12 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-        <EditText android:id="@+id/etTitle" android:hint="Title" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-        <EditText android:id="@+id/etDesc" android:hint="Description (≥30 chars)" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textMultiLine"/>
-        <EditText android:id="@+id/etCategory" android:hint="Category" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-        <EditText android:id="@+id/etLocation" android:hint="Location (Mulungushi campus)" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-        <EditText android:id="@+id/etContact" android:hint="Contact (phone or email)" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-        <Button android:id="@+id/btnDate" android:text="Select Date" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"/>
-        <Button android:id="@+id/btnSubmit" android:text="Post Item" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"/>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="331dp"
+            android:layout_height="139dp"
+            android:layout_gravity="center"
+            android:background="@drawable/roundedcorner"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="42dp"
+            android:textStyle="bold"
+            tools:text="POST LOST ITEM" />
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:hint="Title of the item"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/etDesc"
+            android:layout_width="match_parent"
+
+            android:layout_height="96dp"
+            android:hint="Description (≥30 chars)"
+            android:inputType="textMultiLine"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:hint="Category"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/etLocation"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:hint="Location (Library, SSS Classes )"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/etContact"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:hint="Contact (phone or email)"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedcorner"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Select Date" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/roundedcorner"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:text="Post Item" />
+
     </LinearLayout>
 </ScrollView>
