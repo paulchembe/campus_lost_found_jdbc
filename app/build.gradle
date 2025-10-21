@@ -4,6 +4,7 @@ android {
 
   compileSdkVersion 33
   defaultConfig {
+    namespace 'com.example.campuslostfound'
     applicationId "com.example.campuslostfound"
     minSdkVersion 21
     targetSdkVersion 33
