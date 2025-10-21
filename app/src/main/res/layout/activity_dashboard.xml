@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +11,20 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        app:srcCompat="@drawable/woman" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/roundedcorner"
+        android:backgroundTint="@color/white"
         android:backgroundTintMode="src_in"
         android:text="TextView"
         android:textColor="@color/black"
@@ -62,19 +73,19 @@
             android:layout_width="wrap_content"
             android:layout_height="101dp"
             android:layout_rowWeight="1"
-            android:textColor="@color/white"
             android:layout_columnWeight="1"
             android:background="@drawable/roundedcorner"
             android:backgroundTint="#6A2817"
             android:text="Feed"
-            android:textStyle="bold"/>
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnPost"
             android:layout_height="120dp"
+            android:layout_width="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:androidyout_width="0dp:la"
             android:background="@drawable/roundedcorner"
             android:backgroundTint="#6A2817"
             android:text="Post Item"

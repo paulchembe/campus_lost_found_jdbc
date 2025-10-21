@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
-<LinearLayout android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <EditText android:id="@+id/etFirst" android:hint="First name" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <EditText android:id="@+id/etLast" android:hint="Last name" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <EditText android:id="@+id/etNrc" android:hint="NRC" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <EditText android:id="@+id/etStudent" android:hint="Student number" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <EditText android:id="@+id/etPhone" android:hint="Phone" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <EditText android:id="@+id/etPassword" android:hint="Password" android:inputType="textPassword" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <Button android:id="@+id/btnRegister" android:text="Register" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"/>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="133dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/bottom_btn3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="User Details"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etFirst"
+        android:hint="First name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <EditText
+        android:id="@+id/etLast"
+        android:hint="Last name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <EditText
+        android:id="@+id/etNrc"
+        android:hint="NRC"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <EditText
+        android:id="@+id/etStudent"
+        android:hint="Student number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <EditText
+        android:id="@+id/etPhone"
+        android:hint="Phone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <EditText
+        android:id="@+id/etPassword"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+    <Button
+        android:id="@+id/btnRegister"
+        android:text="Register"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:backgroundTint="#4CAF50"
+        android:background="@drawable/roundedcorner"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"/>
 </LinearLayout>
 </ScrollView>
