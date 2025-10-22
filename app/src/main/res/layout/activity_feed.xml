@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/trends"
+            android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,6 +26,7 @@
             android:layout_width="368dp"
             android:layout_height="61dp"
             android:foregroundGravity="center"
+            android:layout_marginTop="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +42,7 @@
         android:layout_gravity="center"
         android:background="@drawable/roundedcorner"
         android:text="View Items"
+        android:layout_marginTop="30dp"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="45dp"
@@ -50,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#F44336"
+        android:layout_marginTop="30dp"
         android:text="Lost" />
 
     <Button
