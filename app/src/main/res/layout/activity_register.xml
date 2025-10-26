@@ -4,71 +4,107 @@
     android:background="#A0B6CC"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="133dp"
-        android:layout_height="96dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/bottom_btn3" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/roundedcorner"
-        android:text="User Details"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="133dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/bottom_btn3" />
 
-    <EditText
-        android:id="@+id/etFirst"
-        android:hint="First name"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-    <EditText
-        android:id="@+id/etLast"
-        android:hint="Last name"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-    <EditText
-        android:id="@+id/etNrc"
-        android:hint="NRC"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-    <EditText
-        android:id="@+id/etStudent"
-        android:hint="Student number"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-    <EditText
-        android:id="@+id/etPhone"
-        android:hint="Phone"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-    <EditText
-        android:id="@+id/etPassword"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-    <Button
-        android:id="@+id/btnRegister"
-        android:text="Register"
-        android:textSize="25dp"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:backgroundTint="#4CAF50"
-        android:background="@drawable/roundedcorner"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/roundedcorner"
+            android:text="User Details"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etFirst"
+            android:hint="First name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <EditText
+            android:id="@+id/etLast"
+            android:hint="Last name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <EditText
+            android:id="@+id/etNrc"
+            android:hint="NRC"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <EditText
+            android:id="@+id/etStudent"
+            android:hint="Student number"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <EditText
+            android:id="@+id/etPhone"
+            android:hint="Phone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <EditText
+            android:id="@+id/etPassword"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="Register"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:backgroundTint="#4CAF50"
+            android:background="@drawable/roundedcorner"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="33dp" />
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:layout_gravity="center"
+            android:background="#A0B6CC"
+            android:backgroundTint="#A0B6CC" >
+
+        </WebView>
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/back"
+            android:backgroundTint="@color/black"
+            android:contentDescription="@string/todo" />
+
+        <TextView
+            android:layout_width="229dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Go Back To Login Page!"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </ScrollView>
