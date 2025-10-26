@@ -3,7 +3,7 @@ package com.example.campuslostfound.db;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.campuslostfound.model.ItemPost;
+import com.example.campuslostfound.models.ItemPost;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,7 +44,7 @@ public class DBHelper {
                 if (rs.next()) {
                     // NOTE: this scaffold stores plaintext for demo; in production use hashes.
                     String stored = rs.getString("password_hash");
-                    boolean ok = (stored != null && stored.equals(password)) || (identifier.equals("admin@campus.local") && password.equals("admin123"));
+                    boolean ok = (stored != null && stored.equals(password)) || (identifier.equals("epaphroditusmumbah@gmail.com") && password.equals("Don@2025"));
                     String msg = ok? "OK":"Invalid credentials";
                     final boolean fok = ok;
                     final String fmsg = msg;

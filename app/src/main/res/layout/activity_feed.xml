@@ -51,6 +51,7 @@
     <Button
         android:id="@+id/btnLost"
         android:layout_width="match_parent"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:backgroundTint="#F44336"
         android:layout_marginTop="30dp"
@@ -59,9 +60,10 @@
     <Button
         android:id="@+id/btnFound"
         android:layout_width="match_parent"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#03BA0A"
         android:text="Found" />
 
 </LinearLayout>

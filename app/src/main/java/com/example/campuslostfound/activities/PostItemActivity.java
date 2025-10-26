@@ -8,10 +8,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.campuslostfound.R;
+import com.example.campuslostfound.api.ApiClient;
 import com.example.campuslostfound.db.DBHelper;
-import com.example.campuslostfound.model.ItemPost;
+import com.example.campuslostfound.models.ItemPost;
+
+import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PostItemActivity extends AppCompatActivity {
     EditText etTitle, etDesc, etCategory, etLocation, etContact;
@@ -29,6 +34,8 @@ public class PostItemActivity extends AppCompatActivity {
         etContact = findViewById(R.id.etContact);
         btnDate = findViewById(R.id.btnDate);
         btnSubmit = findViewById(R.id.btnSubmit);
+
+
 
         btnDate.setOnClickListener(v-> {
             Calendar c = Calendar.getInstance();

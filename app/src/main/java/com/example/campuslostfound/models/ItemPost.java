@@ -1,4 +1,4 @@
-package com.example.campuslostfound.model;
+package com.example.campuslostfound.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
