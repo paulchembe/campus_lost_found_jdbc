@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5897DE"
+    android:background="#c3cee0"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -16,7 +16,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="141dp"
-        app:srcCompat="@drawable/woman" />
+        app:srcCompat="@drawable/foundicon" />
 
     <TextView
         android:id="@+id/textView"
@@ -24,10 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/roundedcorner"
-        android:backgroundTint="@color/white"
         android:backgroundTintMode="src_in"
         android:text="TextView"
-        android:textColor="@color/black"
+        android:textColor="#010752"
         android:textSize="60dp"
         android:textStyle="bold"
         tools:text="DASHBOARD" />
@@ -35,7 +34,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="377dp"
         android:layout_height="208dp"
-        android:background="@drawable/trends">
+        android:background="@drawable/dashimage">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,6 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/dash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:background="@drawable/roundedcorner"
-            android:backgroundTint="#6A2817"
+            android:backgroundTint="#010752"
             android:text="Feed"
             android:textColor="@color/white"
             android:textStyle="bold" />
@@ -87,7 +87,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:background="@drawable/roundedcorner"
-            android:backgroundTint="#6A2817"
+            android:backgroundTint="#010752"
             android:text="Post Item"
             android:textColor="@color/white"
             android:textStyle="bold" />
@@ -99,7 +99,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:background="@drawable/roundedcorner"
-            android:backgroundTint="#6A2817"
+            android:backgroundTint="#010752"
             android:text="Matches"
             android:textStyle="bold"
             android:textColor="@color/white" />
@@ -112,7 +112,7 @@
             android:textColor="@color/white"
             android:layout_columnWeight="1"
             android:background="@drawable/roundedcorner"
-            android:backgroundTint="#6A2817"
+            android:backgroundTint="#010752"
             android:text="About Us"
             android:textStyle="bold"/>
     </GridLayout>

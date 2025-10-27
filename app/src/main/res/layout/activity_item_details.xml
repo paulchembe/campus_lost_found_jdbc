@@ -4,16 +4,17 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
-    android:background="#A0B6CC"
+    android:background="@drawable/niceback"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!-- placeholder -->
     <Button
         android:id="@+id/btnMarkReturned"
         android:text="Mark Returned"
-        android:background="#FF9800"
+        android:background="#FF131D"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"/>
     <Button
         android:id="@+id/btnMatches"
         android:text="View Matches"

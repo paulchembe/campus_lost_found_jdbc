@@ -2,7 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#A0B6CC"
+    android:background="@drawable/niceback"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,13 +16,11 @@
             android:layout_width="331dp"
             android:layout_height="139dp"
             android:layout_gravity="center"
-            android:background="@drawable/roundedcorner"
             android:gravity="center"
             android:text="TextView"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:backgroundTint="#A0B6CC"
-            android:textColor="@color/black"
+            android:textColor="#0C5B80"
             android:textSize="42dp"
             android:layout_marginTop="15dp"
             android:textStyle="bold"
@@ -72,7 +70,8 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/roundedcorner"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="Select Date" />
+            android:text="Select Date"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/btnSubmit"
@@ -81,7 +80,8 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/roundedcorner"
             android:backgroundTint="@android:color/holo_green_dark"
-            android:text="Post Item" />
+            android:text="Post Item"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 </ScrollView>

@@ -2,37 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#A0B6CC"
+    android:background="@drawable/niceback"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="171dp">
+        android:layout_width="296dp"
+        android:layout_height="142dp"
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/trends"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        >
 
         <ImageView
             android:id="@+id/imageView10"
             android:layout_width="368dp"
             android:layout_height="61dp"
-            android:foregroundGravity="center"
             android:layout_marginTop="30dp"
+            android:foregroundGravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView9"
-            app:layout_constraintVertical_bias="0.425"
-            app:srcCompat="@drawable/arc_1" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="174dp"
+            android:layout_height="119dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/searchpic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.542" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,11 +42,10 @@
         android:layout_width="262dp"
         android:layout_height="83dp"
         android:layout_gravity="center"
-        android:background="@drawable/roundedcorner"
         android:text="View Items"
         android:layout_marginTop="30dp"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="#1E88E5"
         android:textSize="45dp"
         android:textStyle="bold" />
 
@@ -53,7 +54,7 @@
         android:layout_width="match_parent"
         android:textColor="@color/white"
         android:layout_height="wrap_content"
-        android:backgroundTint="#F44336"
+        android:backgroundTint="#EF1304"
         android:layout_marginTop="30dp"
         android:text="Lost" />
 
@@ -63,7 +64,7 @@
         android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:backgroundTint="#03BA0A"
+        android:backgroundTint="#1E88E5"
         android:text="Found" />
 
 </LinearLayout>

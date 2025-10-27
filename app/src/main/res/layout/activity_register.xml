@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#A0B6CC"
+    android:background="@drawable/niceback"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +16,7 @@
             android:layout_width="133dp"
             android:layout_height="96dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/bottom_btn3" />
+            app:srcCompat="@drawable/account_icon" />
 
         <TextView
             android:id="@+id/textView2"
@@ -66,7 +66,7 @@
             android:id="@+id/btnRegister"
             android:text="Register"
             android:textSize="25dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:backgroundTint="#4CAF50"
             android:background="@drawable/roundedcorner"
@@ -93,7 +93,7 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:background="@drawable/back"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="#039BE5"
             android:contentDescription="@string/todo" />
 
         <TextView

@@ -8,7 +8,7 @@ public class DBConnection {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(
-                    DBConfig.getConnectionUrl(),
+                    DBConfig.getJdbcUrl(),
                     DBConfig.DB_USER,
                     DBConfig.DB_PASS
             );

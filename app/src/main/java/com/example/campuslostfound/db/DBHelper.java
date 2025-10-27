@@ -24,7 +24,7 @@ public class DBHelper {
     }
 
     private static Connection connect() throws Exception {
-        String url = DBConfig.getConnectionUrl();
+        String url = DBConfig.getJdbcUrl();
         return DriverManager.getConnection(url, DBConfig.DB_USER, DBConfig.DB_PASS);
     }
 

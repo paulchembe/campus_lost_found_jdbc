@@ -1,13 +1,15 @@
 package com.example.campuslostfound.db;
 
 public class DBConfig {
-    public static final String DB_HOST = "localhost";
-    public static final int DB_PORT = 3306;
+    // <-- UPDATE THESE BEFORE RUNNING THE APP -->
+    public static final String DB_HOST = "DESKTOP-221LS3N"; // your MariaDB host (IP or hostname)
+    public static final int DB_PORT = 3308;
     public static final String DB_NAME = "campus_lost_found";
-    public static final String DB_USER = "root";
-    public static final String DB_PASS = "";
+    public static final String DB_USER = "root@localhost";
+    public static final String DB_PASS = "don";
 
-    public static String getConnectionUrl() {
-        return "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+    // JDBC URL
+    public static String getJdbcUrl() {
+        return String.format("jdbc:mariadb://%s:%d/%s", DB_HOST, DB_PORT, DB_NAME);
     }
 }
