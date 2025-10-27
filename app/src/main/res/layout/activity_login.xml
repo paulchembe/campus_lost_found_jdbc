@@ -11,19 +11,20 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="175dp"
-        android:layout_height="154dp"
+        android:layout_width="125dp"
+        android:layout_height="107dp"
         android:layout_gravity="center"
         android:background="@drawable/foundicon" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
-        android:layout_height="106dp"
-        android:lineSpacingExtra="8sp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
         android:text="Our App provides a centralized system to record and track lost or found items"
         android:textAlignment="center"
-        android:textSize="24dp"
+        android:textColor="#1E88E5"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <Space
@@ -33,7 +34,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="84dp"
-        android:layout_height="68dp"
+        android:layout_height="94dp"
         android:layout_gravity="center"
         app:srcCompat="@drawable/account_icon" />
 
@@ -65,15 +66,17 @@
         android:minHeight="48dp" />
 
 
+
+
     <LinearLayout
         android:layout_width="370dp"
-        android:layout_height="89dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="173dp"
-            android:layout_height="69dp"
+            android:layout_width="322dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:background="@drawable/roundedcorner"
@@ -81,11 +84,16 @@
             android:text="Login"
             android:textColor="@color/white"
             android:textSize="20dp" />
-
+<TextView
+    android:layout_width="match_parent"
+    android:text="OR"
+    android:gravity="center"
+    android:textSize="20dp"
+    android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="173dp"
-            android:layout_height="69dp"
+            android:layout_width="322dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:background="@drawable/roundedcorner"

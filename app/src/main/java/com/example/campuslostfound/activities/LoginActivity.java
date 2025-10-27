@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
 
         // Set WebView background color
-        webView.setBackgroundColor(0xFFA0B6CC); // ARGB: FF = fully opaque
+        webView.setBackgroundColor(0xFFA0B6C); // ARGB: FF = fully opaque
         webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null); // ensures background renders
 
 
