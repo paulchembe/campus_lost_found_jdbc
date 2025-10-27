@@ -83,5 +83,6 @@
             android:text="Post Item"
             android:textColor="@color/white"/>
 
+
     </LinearLayout>
 </ScrollView>
