@@ -25,11 +25,10 @@
         android:layout_gravity="center"
         android:background="@drawable/roundedcorner"
         android:backgroundTintMode="src_in"
-        android:text="TextView"
         android:textColor="#010752"
         android:textSize="60dp"
         android:textStyle="bold"
-        tools:text="DASHBOARD" />
+        android:text="DASHBOARD" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="377dp"

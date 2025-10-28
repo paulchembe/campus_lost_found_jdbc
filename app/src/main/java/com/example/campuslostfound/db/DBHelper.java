@@ -2,152 +2,122 @@ package com.example.campuslostfound.db;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
+import com.example.campuslostfound.api.ApiInterface;
+import com.example.campuslostfound.models.ApiResponse;
 import com.example.campuslostfound.models.ItemPost;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DBHelper {
 
-    static {
-        try {
-            // ensure driver loaded
-            Class.forName("org.mariadb.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    // 🔗 Change this to your local API URL (for emulator use 10.0.2.2)
+    private static final String BASE_URL = "http://10.0.2.2/campuslostfound/";
+    // 👉 For a physical device, use your PC's IP:
+    // private static final String BASE_URL = "http://192.168.x.x/campuslostfound/";
+
+    private static final Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    private static final ApiInterface api = retrofit.create(ApiInterface.class);
+
+    // ---- Callback Interfaces ----
+    public interface LoginCallback {
+        void onResult(boolean ok, String message);
     }
 
-    private static Connection connect() throws Exception {
-        String url = DBConfig.getJdbcUrl();
-        return DriverManager.getConnection(url, DBConfig.DB_USER, DBConfig.DB_PASS);
+    public interface InsertCallback {
+        void onInserted(boolean ok, long id);
     }
 
-    // Callback interfaces
-    public interface LoginCallback { void onResult(boolean ok, String message); }
-    public interface InsertCallback { void onInserted(boolean ok, long id); }
-    public interface ItemsCallback { void onResult(List<ItemPost> items); }
+    public interface ItemsCallback {
+        void onResult(List<ItemPost> items);
+    }
 
-    // login by student_number or admin by email
-    public static void loginUserAsync(String identifier, String password, LoginCallback cb) {
-        new Thread(() -> {
-            try (Connection c = connect()) {
-                PreparedStatement st = c.prepareStatement("SELECT * FROM users WHERE (student_number=? OR email=?) LIMIT 1");
-                st.setString(1, identifier);
-                st.setString(2, identifier);
-                ResultSet rs = st.executeQuery();
-                if (rs.next()) {
-                    // NOTE: this scaffold stores plaintext for demo; in production use hashes.
-                    String stored = rs.getString("password_hash");
-                    boolean ok = (stored != null && stored.equals(password)) || (identifier.equals("epaphroditusmumbah@gmail.com") && password.equals("Don@2025"));
-                    String msg = ok? "OK":"Invalid credentials";
-                    final boolean fok = ok;
-                    final String fmsg = msg;
-                    new Handler(Looper.getMainLooper()).post(() -> cb.onResult(fok, fmsg));
-                    return;
-                }
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(false, "User not found"));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(false, ex.getMessage()));
+    public interface BiCallback {
+        void onResult(boolean ok, String message);
+    }
+
+    // ---- FETCH ITEMS ----
+    public static void getItemsByTypeAsync(String type, ItemsCallback cb) {
+        api.getItemsByType(type).enqueue(new Callback<List<ItemPost>>() {
+            @Override
+            public void onResponse(Call<List<ItemPost>> call, Response<List<ItemPost>> response) {
+                List<ItemPost> items = response.isSuccessful() && response.body() != null ? response.body() : List.of();
+                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(items));
             }
-        }).start();
-    }
 
-    public static void registerUserAsync(String firstName, String lastName, String nrc, String studentNumber, String phone, String password, LoginCallback cb) {
-        new Thread(() -> {
-            try (Connection c = connect()) {
-                PreparedStatement ins = c.prepareStatement("INSERT INTO users (first_name,last_name,nrc,student_number,phone,password_hash) VALUES (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-                ins.setString(1, firstName);
-                ins.setString(2, lastName);
-                ins.setString(3, nrc);
-                ins.setString(4, studentNumber);
-                ins.setString(5, phone);
-                ins.setString(6, password);
-                ins.executeUpdate();
-                ResultSet keys = ins.getGeneratedKeys();
-                if (keys.next()) {
-                    new Handler(Looper.getMainLooper()).post(() -> cb.onResult(true, "Registered")); return;
-                }
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(false, "Could not register"));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(false, ex.getMessage()));
+            @Override
+            public void onFailure(Call<List<ItemPost>> call, Throwable t) {
+                t.printStackTrace();
+                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(List.of()));
             }
-        }).start();
+        });
     }
 
-    public static void createItemAsync(ItemPost p, InsertCallback cb) {
-        new Thread(() -> {
-            try (Connection c = connect()) {
-                PreparedStatement st = c.prepareStatement("INSERT INTO items (type,title,description,category,location,date,photo_uri,contact,status) VALUES (?,?,?,?,?,?,?,?,'OPEN')", PreparedStatement.RETURN_GENERATED_KEYS);
-                st.setString(1, p.type);
-                st.setString(2, p.title);
-                st.setString(3, p.description);
-                st.setString(4, p.category);
-                st.setString(5, p.location);
-                st.setLong(6, p.date);
-                st.setString(7, p.photoUri);
-                st.setString(8, p.contact);
-                st.executeUpdate();
-                ResultSet keys = st.getGeneratedKeys();
-                long id = -1;
-                if (keys.next()) id = keys.getLong(1);
-                long fid = id;
-                new Handler(Looper.getMainLooper()).post(() -> cb.onInserted(true, fid));
-            } catch (Exception ex) {
-                ex.printStackTrace();
+    // ---- CREATE ITEM (UPDATED to send @FormUrlEncoded data) ----
+    public static void createItemAsync(ItemPost item, InsertCallback cb) {
+        Call<ApiResponse> call = api.createItem(
+                item.type,
+                item.title,
+                item.description,
+                item.category,
+                item.location,
+                String.valueOf(item.date),
+                item.contact,
+                item.photoUri
+        );
+
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                boolean ok = response.isSuccessful() && response.body() != null && response.body().success;
+                long id = (response.body() != null && response.body().id != null) ? response.body().id : -1;
+
+                // Log full error message if something fails
+                if (!ok) {
+                    try {
+                        Log.e("DBHelper", "Create item failed: " +
+                                (response.errorBody() != null ? response.errorBody().string() : response.message()));
+                    } catch (Exception e) {
+                        Log.e("DBHelper", "Error reading error body", e);
+                    }
+                }
+
+                new Handler(Looper.getMainLooper()).post(() -> cb.onInserted(ok, id));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.e("DBHelper", "Network error while creating item", t);
                 new Handler(Looper.getMainLooper()).post(() -> cb.onInserted(false, -1));
             }
-        }).start();
+        });
     }
 
-    public static void recentItemsAsync(String type, ItemsCallback cb) {
-        new Thread(() -> {
-            List<ItemPost> out = new ArrayList<>();
-            try (Connection c = connect()) {
-                PreparedStatement st = c.prepareStatement("SELECT * FROM items WHERE type=? ORDER BY created_at DESC LIMIT 500");
-                st.setString(1, type);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    ItemPost p = new ItemPost();
-                    p.id = rs.getLong("id");
-                    p.type = rs.getString("type");
-                    p.title = rs.getString("title");
-                    p.description = rs.getString("description");
-                    p.category = rs.getString("category");
-                    p.location = rs.getString("location");
-                    p.date = rs.getLong("date");
-                    p.photoUri = rs.getString("photo_uri");
-                    p.contact = rs.getString("contact");
-                    p.status = rs.getString("status");
-                    out.add(p);
-                }
-                List<ItemPost> fin = out;
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(fin));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(out));
+    // ---- MARK RETURNED ----
+    public static void markReturnedAsync(long id, BiCallback cb) {
+        api.markReturned(id).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                boolean ok = response.isSuccessful() && response.body() != null && response.body().success;
+                String msg = (response.body() != null) ? response.body().message : "Server error";
+                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(ok, msg));
             }
-        }).start();
-    }
 
-    public static void markReturnedAsync(long id, LoginCallback cb) {
-        new Thread(() -> {
-            try (Connection c = connect()) {
-                PreparedStatement st = c.prepareStatement("UPDATE items SET status='RETURNED' WHERE id=?");
-                st.setLong(1, id);
-                int r = st.executeUpdate();
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(r>0, r>0?"OK":"Failed to update"));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(false, ex.getMessage()));
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                new Handler(Looper.getMainLooper()).post(() -> cb.onResult(false, t.getMessage()));
             }
-        }).start();
+        });
     }
 }

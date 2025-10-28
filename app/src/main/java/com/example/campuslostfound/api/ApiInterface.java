@@ -2,50 +2,53 @@ package com.example.campuslostfound.api;
 
 import com.example.campuslostfound.models.ApiResponse;
 import com.example.campuslostfound.models.ItemPost;
-import com.example.campuslostfound.models.LoginResponse;
-import com.example.campuslostfound.models.RegisterResponse;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-public interface ApiService {
+public interface ApiInterface {
 
-    // === USER AUTH ===
     @FormUrlEncoded
     @POST("login.php")
-    Call<LoginResponse> loginUser(
+    Call<ApiResponse> loginUser(
             @Field("identifier") String identifier,
             @Field("password") String password
     );
 
     @FormUrlEncoded
     @POST("register.php")
-    Call<RegisterResponse> registerUser(
+    Call<ApiResponse> registerUser(
             @Field("first_name") String firstName,
             @Field("last_name") String lastName,
             @Field("nrc") String nrc,
-            @Field("student_id") String studentId,
+            @Field("student_no") String studentId,
             @Field("phone") String phone,
             @Field("password") String password
     );
 
-    // === ITEMS ===
-    // Create Lost/Found Post
-    @POST("createItem.php")
-    Call<ApiResponse> createItem(@Body ItemPost item);
-
-    // Get Items by Type (LOST / FOUND)
     @GET("getItemsByType.php")
     Call<List<ItemPost>> getItemsByType(@Query("type") String type);
 
-    // Mark Item as Returned
+    // ✅ UPDATED: send form-encoded data instead of JSON body
+    @FormUrlEncoded
+    @POST("createItem.php")
+    Call<ApiResponse> createItem(
+            @Field("type") String type,
+            @Field("title") String title,
+            @Field("description") String description,
+            @Field("category") String category,
+            @Field("location") String location,
+            @Field("date") String date,
+            @Field("contact") String contact,
+            @Field("photoUri") String photoUri
+    );
+
     @FormUrlEncoded
     @POST("markReturned.php")
     Call<ApiResponse> markReturned(@Field("id") long id);

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/niceback"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,30 +11,47 @@
         android:padding="16dp">
 
         <TextView
-            android:layout_width="331dp"
-            android:layout_height="139dp"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textAllCaps="false"
+            android:text="POST ITEM"
             android:textColor="#0C5B80"
-            android:textSize="42dp"
-            android:layout_marginTop="15dp"
+            android:textSize="36sp"
             android:textStyle="bold"
-            tools:text="POST LOST ITEM" />
+            android:layout_marginTop="15dp" />
+
+        <!-- Status Radio Buttons -->
+
+
+        <!-- Image Picker -->
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="85dp"
+            android:layout_height="86dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_camera_placeholder"
+            android:scaleType="centerCrop" />
+
+        <Button
+            android:id="@+id/btnPickImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Picture"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="48dp"
             android:hint="Title of the item"
             android:textStyle="italic" />
 
         <EditText
             android:id="@+id/etDesc"
             android:layout_width="match_parent"
-
             android:layout_height="96dp"
             android:hint="Description (≥30 chars)"
             android:inputType="textMultiLine"
@@ -45,44 +60,64 @@
         <EditText
             android:id="@+id/etCategory"
             android:layout_width="match_parent"
-            android:layout_height="71dp"
+            android:layout_height="48dp"
             android:hint="Category"
             android:textStyle="italic" />
 
         <EditText
             android:id="@+id/etLocation"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="48dp"
             android:hint="Location (Library, SSS Classes )"
             android:textStyle="italic" />
 
         <EditText
             android:id="@+id/etContact"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="48dp"
             android:hint="Contact (phone or email)"
             android:textStyle="italic" />
+        <RadioGroup
+            android:id="@+id/rgStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <RadioButton
+                android:id="@+id/rbLost"
+                android:layout_width="89dp"
+                android:layout_height="48dp"
+                android:checked="true"
+                android:text="Lost"
+                android:textColor="#000" />
+
+            <RadioButton
+                android:id="@+id/rbFound"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Found"
+                android:layout_marginStart="40dp"
+                android:textColor="#000"/>
+        </RadioGroup>
 
         <Button
             android:id="@+id/btnDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/roundedcorner"
-            android:backgroundTint="@android:color/holo_blue_dark"
             android:text="Select Date"
-            android:textColor="@color/white"/>
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:background="@drawable/roundedcorner"
             android:backgroundTint="@android:color/holo_green_dark"
             android:text="Post Item"
-            android:textColor="@color/white"/>
-
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </ScrollView>
