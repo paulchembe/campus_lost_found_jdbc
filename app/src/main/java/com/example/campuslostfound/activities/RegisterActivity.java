@@ -11,12 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.campuslostfound.R;
-import com.example.campuslostfound.api.ApiClient;
+import com.example.campuslostfound.db.DBHelper;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class RegisterActivity extends AppCompatActivity {
+public class
+RegisterActivity extends AppCompatActivity {
     EditText etFirst, etLast, etNrc, etStudent, etPhone, etPassword;
     Button btnReg;
     WebView webView;
@@ -37,44 +35,43 @@ public class RegisterActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
         webView = findViewById(R.id.webView);
 
-// ✅ Set the background color
-        webView.setBackgroundColor(0xFFA0B6C); // ARGB: FF = fully opaque
-        webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null); // ensures color renders
-        webView.getSettings().setJavaScriptEnabled(true);
-
-
-        webView = findViewById(R.id.webView);
+        // Optional: simple UI background setup
+        webView.setBackgroundColor(0xFFFAFAFA);
+        webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
         webView.getSettings().setJavaScriptEnabled(true);
 
         // ✅ Register button action
         btnReg.setOnClickListener(v -> {
-            new Thread(() -> {
-                Map<String, String> params = new HashMap<>();
-                params.put("first_name", etFirst.getText().toString());
-                params.put("last_name", etLast.getText().toString());
-                params.put("nrc", etNrc.getText().toString());
-                params.put("student_no", etStudent.getText().toString());
-                params.put("phone", etPhone.getText().toString());
-                params.put("password", etPassword.getText().toString());
+            String fn = etFirst.getText().toString().trim();
+            String ln = etLast.getText().toString().trim();
+            String nrc = etNrc.getText().toString().trim();
+            String studNo = etStudent.getText().toString().trim();
+            String phone = etPhone.getText().toString().trim();
+            String pass = etPassword.getText().toString().trim();
 
-                String response = ApiClient.post("register.php", params);
+            // Validation
+            if (fn.isEmpty() || ln.isEmpty() || nrc.isEmpty() ||
+                    studNo.isEmpty() || phone.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                runOnUiThread(() -> {
-                    webView.loadDataWithBaseURL(null, response, "text/html", "UTF-8", null);
+            // 🟢 Call DBHelper.registerUser(...) instead of ApiClient
+            DBHelper.registerUser(fn, ln, nrc, studNo, phone, pass, (ok, msg) -> runOnUiThread(() -> {
+                if (ok) {
+                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
 
-                    // Navigate to login if registration successful
-                    if (response.contains("Registration Successful")) {
-                        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, LoginActivity.class));
-                        finish();
-                    } else if (response.contains("Registration Failed")) {
-                        Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }).start();
+                    // Return to login screen
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(this, "Registration failed: " + msg, Toast.LENGTH_LONG).show();
+                }
+            }));
         });
 
-        // ✅ Back button action: always return to login
+        // ✅ Back button action
         btnBack.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
             finish();

@@ -61,6 +61,25 @@
                 android:textSize="14sp"
                 android:textColor="#777" />
 
+            <!-- Added Contact -->
+            <TextView
+                android:id="@+id/tvContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact: 0971234567"
+                android:textSize="14sp"
+                android:textColor="#555" />
+
+            <!-- Added Type (Lost/Found) -->
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: Lost"
+                android:textSize="14sp"
+                android:textColor="#555"
+                android:textStyle="italic" />
+
         </LinearLayout>
 
     </LinearLayout>

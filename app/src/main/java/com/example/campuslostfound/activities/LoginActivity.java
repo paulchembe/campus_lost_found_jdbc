@@ -1,6 +1,7 @@
 package com.example.campuslostfound.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.campuslostfound.R;
 import com.example.campuslostfound.api.ApiClient;
+import com.example.campuslostfound.db.DBHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,38 +42,35 @@ public class LoginActivity extends AppCompatActivity {
 
         //Login button action
         btnLogin.setOnClickListener(v -> {
-            String id = etIdentifier.getText().toString().trim();
-            String pw = etPassword.getText().toString().trim();
+            String identifier = etIdentifier.getText().toString().trim();
+            String password = etPassword.getText().toString().trim();
 
-            if (id.isEmpty() || pw.isEmpty()) {
-                Toast.makeText(this, "Enter credentials", Toast.LENGTH_SHORT).show();
+            if (identifier.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            new Thread(() -> {
-                Map<String, String> params = new HashMap<>();
-                params.put("identifier", id);
-                params.put("password", pw);
+            DBHelper.loginAsync(identifier, password, (ok, msg, user) ->
+                    runOnUiThread(() -> {
+                        if (ok) {
+                            SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                            prefs.edit()
+                                    .putInt("user_id", user.id)
+                                    .apply();
 
-                String response = ApiClient.post("login.php", params);
-
-                runOnUiThread(() -> {
-                    // Display HTML message in WebView
-                    webView.loadDataWithBaseURL(null, response, "text/html", "UTF-8", null);
-
-                    // Detect "Login Successful" in the HTML response
-                    if (response.contains("Login Successful")) {
-                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(this, DashboardActivity.class));
-                        finish(); // close login activity
-                    } else if (response.contains("Login Failed")) {
-                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }).start();
+                            Intent i = new Intent(this, DashboardActivity.class);
+                            i.putExtra("user_id", user.id);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Login failed: " + msg, Toast.LENGTH_LONG).show();
+                        }
+                    })
+            );
         });
 
-        // ✅ Go to register page
+
+        // Go to register page
         btnRegister.setOnClickListener(v ->
                 startActivity(new Intent(this, RegisterActivity.class))
         );

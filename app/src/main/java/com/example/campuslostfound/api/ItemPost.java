@@ -1,49 +1,28 @@
 package com.example.campuslostfound.api;
 
 public class ItemPost {
-    private int id;
-    private String type;        // LOST or FOUND
-    private String title;
-    private String description;
-    private String category;
-    private String location;
-    private String date;
-    private String photoUri;
-    private String contact;
-    private String status;
-    private int userId;
+    public int id;             // auto-increment from DB
+    public String type;        // LOST or FOUND (from RadioGroup)
+    public String title;
+    public String description;
+    public String category;
+    public String location;
+    public String date;        // YYYY-MM-DD
+    public String contact;
+    public String photoUri;    // optional
+    public String created_at;  // timestamp returned by backend
 
-    // Getters and Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public ItemPost() {}
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
-
-    public String getLocation() { return location; }
-    public void setLocation(String location) { this.location = location; }
-
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
-
-    public String getPhotoUri() { return photoUri; }
-    public void setPhotoUri(String photoUri) { this.photoUri = photoUri; }
-
-    public String getContact() { return contact; }
-    public void setContact(String contact) { this.contact = contact; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public ItemPost(String type, String title, String description, String category,
+                    String location, String date, String contact, String photoUri) {
+        this.type = type;
+        this.title = title;
+        this.description = description;
+        this.category = category;
+        this.location = location;
+        this.date = date;
+        this.contact = contact;
+        this.photoUri = photoUri;
+    }
 }

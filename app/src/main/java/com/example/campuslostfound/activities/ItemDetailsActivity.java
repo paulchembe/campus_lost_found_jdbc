@@ -1,29 +1,61 @@
 package com.example.campuslostfound.activities;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.campuslostfound.R;
-import com.example.campuslostfound.db.DBHelper;
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ItemDetailsActivity extends AppCompatActivity {
-    Button btnMarkReturned, btnMatches;
-    long itemId = 0;
+
     @Override
-    protected void onCreate(Bundle s) {
-        super.onCreate(s);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
-        btnMarkReturned = findViewById(R.id.btnMarkReturned);
-        btnMatches = findViewById(R.id.btnMatches);
 
-        btnMarkReturned.setOnClickListener(v-> DBHelper.markReturnedAsync(itemId, (ok,msg)-> runOnUiThread(() -> {
-            if (ok) Toast.makeText(this, "Marked returned", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(this, "Failed: "+msg, Toast.LENGTH_SHORT).show();
-        })));
+        ImageView imgItem = findViewById(R.id.imgItemDetail);
+        TextView tvTitle = findViewById(R.id.tvTitleDetail);
+        TextView tvCategory = findViewById(R.id.tvCategoryDetail);
+        TextView tvLocation = findViewById(R.id.tvLocationDetail);
+        TextView tvDate = findViewById(R.id.tvDateDetail);
+        TextView tvDescription = findViewById(R.id.tvDescriptionDetail);
+        TextView tvContact = findViewById(R.id.tvContactDetail);
 
-        btnMatches.setOnClickListener(v-> startActivity(new android.content.Intent(this, MatchesActivity.class)));
+        // Retrieve extras individually
+        String title = getIntent().getStringExtra("title");
+        String category = getIntent().getStringExtra("category");
+        String location = getIntent().getStringExtra("location");
+        long dateMillis = getIntent().getLongExtra("date", 0);
+        String description = getIntent().getStringExtra("description");
+        String contact = getIntent().getStringExtra("contact");
+        String photoUri = getIntent().getStringExtra("photoUri");
+
+        // Set values to views
+        if (title != null) tvTitle.setText(title);
+        if (category != null) tvCategory.setText("Category: " + category);
+        if (location != null) tvLocation.setText("Location: " + location);
+        if (description != null) tvDescription.setText(description);
+        if (contact != null) tvContact.setText("Contact: " + contact);
+
+        if (dateMillis != 0) {
+            Date date = new Date(dateMillis);
+            String formattedDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date);
+            tvDate.setText("Date: " + formattedDate);
+        }
+
+        if (photoUri != null && !photoUri.isEmpty()) {
+            Picasso.get().load(photoUri)
+                    .placeholder(R.drawable.ic_camera_placeholder)
+                    .into(imgItem);
+        } else {
+            imgItem.setImageResource(R.drawable.ic_camera_placeholder);
+        }
     }
 }

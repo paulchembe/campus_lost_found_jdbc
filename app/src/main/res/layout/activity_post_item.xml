@@ -46,7 +46,7 @@
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Title of the item"
+            android:hint="Title of the itemPost"
             android:textStyle="italic" />
 
         <EditText
@@ -101,14 +101,18 @@
                 android:textColor="#000"/>
         </RadioGroup>
 
-        <Button
+         <Button
             android:id="@+id/btnDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="Select Date"
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:gravity="center"
+            android:contentDescription="Pick the date the item was lost or found" />
+
 
         <Button
             android:id="@+id/btnSubmit"

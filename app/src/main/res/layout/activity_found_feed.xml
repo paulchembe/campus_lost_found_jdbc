@@ -7,17 +7,40 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="113dp"
+        android:gravity="center"
+        android:padding="10dp"
         android:text="Found Items"
         android:textColor="#1976D2"
         android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- Progress bar while loading -->
+    <ProgressBar
+        android:id="@+id/progressBarFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Empty message if no items -->
+    <TextView
+        android:id="@+id/tvEmptyFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No found items yet."
+        android:textColor="#555"
         android:gravity="center"
-        android:padding="10dp"
-        android:textStyle="bold"/>
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFound"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:padding="8dp"/>
 </LinearLayout>

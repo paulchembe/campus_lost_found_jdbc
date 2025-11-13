@@ -1,10 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/niceback"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#A0B6CC"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Header Text -->
+    <TextView
+        android:id="@+id/tvHeaderMatches"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:text="Search an item to view matches"
+        android:textColor="#0C5B80"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Search Bar -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewMatches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search items..."
+        android:iconifiedByDefault="false"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Progress bar while loading -->
+    <ProgressBar
+        android:id="@+id/progressBarMatches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Empty message -->
+    <TextView
+        android:id="@+id/tvEmptyMatches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No matching items found."
+        android:textColor="#555"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        android:padding="8dp" />
+
+    <!-- RecyclerView to show matching items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMatches"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:scrollbars="vertical" />
+
+    <!-- Optional footer -->
+    <TextView
+        android:id="@+id/tvFooterMatches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search results are pulled from Lost and Found feeds"
+        android:textColor="#777"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:paddingTop="8dp"
+        android:visibility="visible" />
 
 </LinearLayout>

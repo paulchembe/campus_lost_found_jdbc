@@ -68,12 +68,16 @@ public class PostItemActivity extends AppCompatActivity {
         btnDate.setOnClickListener(v -> {
             Calendar c = Calendar.getInstance();
             new DatePickerDialog(this, (dp, y, m, d) -> {
-                Calendar sel = Calendar.getInstance();
-                sel.set(y, m, d);
-                selectedDate = sel.getTimeInMillis();
-                btnDate.setText(d + "/" + (m + 1) + "/" + y);
+                // Display friendly date on button
+                String displayDate = d + "/" + (m + 1) + "/" + y;
+                btnDate.setText(displayDate);
+
+                // Save date in YYYY-MM-DD format for PHP/MySQL
+                selectedDate = y * 10000 + (m + 1) * 100 + d; // optional numeric representation
+                String itemDateForPhp = String.format("%04d-%02d-%02d", y, m + 1, d); // "2025-11-13"
             }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
         });
+
 
         btnSubmit.setOnClickListener(v -> {
             String title = etTitle.getText().toString().trim();
@@ -83,22 +87,30 @@ public class PostItemActivity extends AppCompatActivity {
                 return;
             }
 
+            // Convert selectedDate to MySQL DATE format yyyy-MM-dd
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(selectedDate);
+            String formattedDate = String.format("%04d-%02d-%02d",
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH) + 1,
+                    cal.get(Calendar.DAY_OF_MONTH));
+
             ItemPost p = new ItemPost();
             p.type = selectedType;
             p.title = title;
             p.description = desc;
             p.category = etCategory.getText().toString();
             p.location = etLocation.getText().toString();
-            p.date = selectedDate;
+            p.date = formattedDate; // ✅ Correct format
             p.contact = etContact.getText().toString();
             p.photoUri = (photoUri != null) ? photoUri.toString() : null;
 
-            DBHelper.createItemAsync(p, (ok, id) -> runOnUiThread(() -> {
+            DBHelper.createItem(p, (ok, msg, id) -> runOnUiThread(() -> {
                 if (ok) {
                     Toast.makeText(this, "Posted under " + selectedType, Toast.LENGTH_SHORT).show();
-                    finish(); // Just close this screen, don't navigate anywhere
+                    finish();
                 } else {
-                    Toast.makeText(this, "Failed to post", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to post: " + msg, Toast.LENGTH_LONG).show();
                 }
             }));
         });
