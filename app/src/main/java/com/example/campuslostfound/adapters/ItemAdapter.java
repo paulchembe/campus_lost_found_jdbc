@@ -1,7 +1,6 @@
 package com.example.campuslostfound.adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +21,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private final Context context;
     private final List<ItemPost> itemList;
-    private OnItemClickListener onItemClickListener;
-
-    public interface OnItemClickListener {
-        void onItemClick(ItemPost item);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
-    }
 
     public ItemAdapter(Context context, List<ItemPost> itemList) {
         this.context = context;
@@ -47,27 +37,32 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         ItemPost item = itemList.get(position);
 
-        holder.tvTitle.setText(item.title);
-        holder.tvCategory.setText("Category: " + item.category);
-        holder.tvLocation.setText("Location: " + item.location);
+        // Set text fields
+        holder.tvTitle.setText(item.title != null ? item.title : "No title");
+        holder.tvCategory.setText("Category: " + (item.category != null ? item.category : "N/A"));
+        holder.tvLocation.setText("Location: " + (item.location != null ? item.location : "N/A"));
 
-        String dateStr = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(item.date);
-        holder.tvDate.setText("Date: " + dateStr);
+        // Format and set date
+        try {
+            String dateStr = item.date != null && !item.date.isEmpty()
+                    ? new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
+                    new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(item.date))
+                    : "N/A";
+            holder.tvDate.setText("Date: " + dateStr);
+        } catch (Exception e) {
+            holder.tvDate.setText("Date: N/A");
+        }
 
+        // Load image using Picasso
         if (item.photoUri != null && !item.photoUri.isEmpty()) {
-            Picasso.get().load(item.photoUri)
+            Picasso.get()
+                    .load(item.photoUri)
                     .placeholder(R.drawable.ic_camera_placeholder)
+                    .error(R.drawable.ic_camera_placeholder)
                     .into(holder.imgItem);
         } else {
             holder.imgItem.setImageResource(R.drawable.ic_camera_placeholder);
         }
-
-        // Handle item click
-        holder.itemView.setOnClickListener(v -> {
-            if (onItemClickListener != null) {
-                onItemClickListener.onItemClick(item);
-            }
-        });
     }
 
     @Override

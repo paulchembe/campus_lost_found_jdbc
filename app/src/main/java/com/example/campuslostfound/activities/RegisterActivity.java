@@ -59,7 +59,7 @@ RegisterActivity extends AppCompatActivity {
             // 🟢 Call DBHelper.registerUser(...) instead of ApiClient
             DBHelper.registerUser(fn, ln, nrc, studNo, phone, pass, (ok, msg) -> runOnUiThread(() -> {
                 if (ok) {
-                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Registered successful", Toast.LENGTH_SHORT).show();
 
                     // Return to login screen
                     Intent intent = new Intent(this, LoginActivity.class);

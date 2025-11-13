@@ -1,10 +1,10 @@
 package com.example.campuslostfound.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,21 +52,7 @@ public class LostFeedActivity extends AppCompatActivity {
                 recyclerLost.setAdapter(new ItemAdapter(this, Collections.emptyList()));
             } else {
                 tvEmpty.setVisibility(View.GONE);
-                ItemAdapter adapter = new ItemAdapter(this, items);
-                recyclerLost.setAdapter(adapter);
-
-                // Handle item click
-                adapter.setOnItemClickListener(item -> {
-                    Intent intent = new Intent(LostFeedActivity.this, ItemDetailsActivity.class);
-                    intent.putExtra("title", item.title);
-                    intent.putExtra("category", item.category);
-                    intent.putExtra("location", item.location);
-                    intent.putExtra("date", item.date); // Use string or formatted date
-                    intent.putExtra("description", item.description);
-                    intent.putExtra("contact", item.contact);
-                    intent.putExtra("photoUri", item.photoUri);
-                    startActivity(intent);
-                });
+                recyclerLost.setAdapter(new ItemAdapter(this, items));
             }
         }));
     }

@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Developer"
+            android:text="Developers"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#1976D2" />
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Joseph B Kasanga"
+            android:text="Group 17 Members"
             android:textSize="16sp"
             android:paddingBottom="16dp" />
 
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Jane Doe"
+            android:text="Every one"
             android:textSize="16sp"
             android:paddingBottom="16dp" />
 
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="John Smith"
+            android:text="Group 17 members"
             android:textSize="16sp"
             android:paddingBottom="16dp" />
 
@@ -81,7 +81,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="University of Example, Campus Labs"
+            android:text="Mulungushi University, Mr Kaluba Zilan"
             android:textSize="16sp"
             android:paddingBottom="16dp" />
 

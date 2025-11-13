@@ -1,7 +1,5 @@
 package com.example.campuslostfound.models;
 
-import java.io.Serializable;
-
 public class ItemPost {
     public String type;
     public String title;
