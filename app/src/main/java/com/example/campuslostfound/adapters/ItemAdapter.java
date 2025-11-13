@@ -1,6 +1,7 @@
 package com.example.campuslostfound.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private final Context context;
     private final List<ItemPost> itemList;
-    private OnItemClickListener listener;
+    private OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener {
         void onItemClick(ItemPost item);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        this.onItemClickListener = listener;
     }
 
     public ItemAdapter(Context context, List<ItemPost> itemList) {
@@ -49,18 +50,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.tvTitle.setText(item.title);
         holder.tvCategory.setText("Category: " + item.category);
         holder.tvLocation.setText("Location: " + item.location);
-        holder.tvDate.setText("Date: " + new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(item.date));
+
+        String dateStr = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(item.date);
+        holder.tvDate.setText("Date: " + dateStr);
 
         if (item.photoUri != null && !item.photoUri.isEmpty()) {
-            Picasso.get().load(item.photoUri).placeholder(R.drawable.ic_camera_placeholder).into(holder.imgItem);
+            Picasso.get().load(item.photoUri)
+                    .placeholder(R.drawable.ic_camera_placeholder)
+                    .into(holder.imgItem);
         } else {
             holder.imgItem.setImageResource(R.drawable.ic_camera_placeholder);
         }
 
-        // Click listener
+        // Handle item click
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(item);
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(item);
             }
         });
     }
