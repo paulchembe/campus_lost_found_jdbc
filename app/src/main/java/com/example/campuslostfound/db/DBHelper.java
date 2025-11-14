@@ -5,9 +5,9 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.example.campuslostfound.api.ApiService;
+import com.example.campuslostfound.api.User;
 import com.example.campuslostfound.models.ApiResponse;
 import com.example.campuslostfound.models.ItemPost;
-import com.example.campuslostfound.api.User;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -28,6 +28,7 @@ public class DBHelper {
     private static final String BASE_URL = "http://10.0.2.2/campuslostfound/"; // Emulator localhost
     private static final String TAG = "DBHelper";
 
+    // -------------------- HTTP CONFIG --------------------
     private static final HttpLoggingInterceptor logging =
             new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -55,9 +56,9 @@ public class DBHelper {
     private static final ApiService api = retrofit.create(ApiService.class);
     private static final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    // ===============================
+    // =====================================================
     // LOGIN
-    // ===============================
+    // =====================================================
     public interface LoginCallback {
         void onResult(boolean success, String message, User user);
     }
@@ -69,9 +70,10 @@ public class DBHelper {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse body = response.body();
                     Log.d(TAG, "Login Response: " + body.message);
-                    mainHandler.post(() -> cb.onResult(body.success && body.user != null,
-                            body.message != null ? body.message : "Login failed",
-                            body.user));
+                    mainHandler.post(() ->
+                            cb.onResult(body.success && body.user != null,
+                                    body.message != null ? body.message : "Login failed",
+                                    body.user));
                 } else {
                     mainHandler.post(() -> cb.onResult(false, "Server error", null));
                 }
@@ -85,17 +87,17 @@ public class DBHelper {
         });
     }
 
-    // ===============================
+    // =====================================================
     // REGISTER
-    // ===============================
+    // =====================================================
     public interface RegisterCallback {
         void onResult(boolean success, String message);
     }
 
-    public static void registerUser(String first_name, String last_name, String nrc,
-                                    String student_no, String phone, String password,
+    public static void registerUser(String firstName, String lastName, String nrc,
+                                    String studentNo, String phone, String password,
                                     RegisterCallback cb) {
-        api.registerUser(first_name, last_name, nrc, student_no, phone, password)
+        api.registerUser(firstName, lastName, nrc, studentNo, phone, password)
                 .enqueue(new Callback<ApiResponse>() {
                     @Override
                     public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -117,9 +119,9 @@ public class DBHelper {
                 });
     }
 
-    // ===============================
+    // =====================================================
     // FETCH ITEMS
-    // ===============================
+    // =====================================================
     public interface ItemsCallback {
         void onResult(List<ItemPost> items);
     }
@@ -128,7 +130,9 @@ public class DBHelper {
         api.getItemsByType(type).enqueue(new Callback<List<ItemPost>>() {
             @Override
             public void onResponse(Call<List<ItemPost>> call, Response<List<ItemPost>> response) {
-                List<ItemPost> items = response.isSuccessful() && response.body() != null ? response.body() : null;
+                List<ItemPost> items = (response.isSuccessful() && response.body() != null)
+                        ? response.body()
+                        : null;
                 mainHandler.post(() -> cb.onResult(items));
             }
 
@@ -140,27 +144,26 @@ public class DBHelper {
         });
     }
 
-    // ===============================
+    // =====================================================
     // CREATE ITEM POST
-    // ===============================
+    // =====================================================
     public interface PostItemCallback {
         void onResult(boolean success, String message, Long id);
     }
 
     public static void createItem(ItemPost item, PostItemCallback cb) {
-        // Convert date to YYYY-MM-DD format for PHP
+        // Convert timestamp to YYYY-MM-DD format for backend
         String formattedDate = "";
         try {
             if (item.date != null && !item.date.isEmpty()) {
                 long millis = Long.parseLong(item.date);
-                formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                        .format(millis);
+                formattedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(millis);
             }
         } catch (NumberFormatException e) {
-            formattedDate = item.date; // assume already formatted
+            formattedDate = item.date; // assume it's already formatted
         }
 
-        Log.d(TAG, "Creating item: type=" + item.type + ", title=" + item.title + ", date=" + formattedDate);
+        Log.d(TAG, "Creating item: " + item.title + " (" + item.type + ")");
 
         api.createItem(
                 item.type != null ? item.type : "",
@@ -181,7 +184,8 @@ public class DBHelper {
                 } else {
                     String msg = "Server error";
                     try {
-                        if (response.errorBody() != null) msg = response.errorBody().string();
+                        if (response.errorBody() != null)
+                            msg = response.errorBody().string();
                     } catch (Exception ignored) {}
                     String finalMsg = msg;
                     mainHandler.post(() -> cb.onResult(false, finalMsg, null));
@@ -196,9 +200,9 @@ public class DBHelper {
         });
     }
 
-    // ===============================
-    // MARK ITEM AS RETURNED
-    // ===============================
+    // =====================================================
+    // MARK ITEM AS RETURNED (Retrofit)
+    // =====================================================
     public interface BiCallback {
         void onResult(boolean success, String message);
     }
@@ -208,20 +212,14 @@ public class DBHelper {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    ApiResponse b = response.body();
-                    Log.d(TAG, "Mark Returned Response: " + b.message);
-                    mainHandler.post(() -> cb.onResult(b.success, b.message));
+                    ApiResponse body = response.body();
+                    Log.d(TAG, "Mark Returned Response: " + body.message);
+                    mainHandler.post(() -> cb.onResult(body.success,
+                            body.message != null ? body.message : "Unknown response"));
                 } else {
-                    String msg = "Server error";
-                    try {
-                        if (response.errorBody() != null) msg = response.errorBody().string();
-                    } catch (Exception ignored) {}
-                    String finalMsg = msg;
-                    mainHandler.post(() -> cb.onResult(false, finalMsg));
+                    mainHandler.post(() -> cb.onResult(false, "Server error"));
                 }
             }
-
-
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {

@@ -12,10 +12,22 @@
     android:padding="16dp">
 
 
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:background="@drawable/roundedcorner"
+        android:backgroundTint="#010752"
+        android:text="Profile"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="141dp"
+        android:layout_height="107dp"
         app:srcCompat="@drawable/foundicon" />
 
     <TextView
@@ -67,6 +79,7 @@
         android:columnCount="2"
         android:rowCount="2">
 
+
         <Button
             android:id="@+id/btnFeed"
             android:layout_width="wrap_content"
@@ -114,5 +127,9 @@
             android:backgroundTint="#010752"
             android:text="About Us"
             android:textStyle="bold"/>
+
+
     </GridLayout>
+
+
 </LinearLayout>

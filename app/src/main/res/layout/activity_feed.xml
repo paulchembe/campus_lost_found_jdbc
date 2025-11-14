@@ -11,9 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="221dp"
         android:layout_height="142dp"
-        android:layout_gravity="center"
-
-        >
+        android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/imageView10"
@@ -67,5 +65,15 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#1E88E5"
         android:text="Found" />
+
+    <!-- New button to demo ItemDetailsActivity -->
+    <Button
+        android:id="@+id/btnItemDetails"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="View Sample Item Details"
+        android:textColor="@color/white"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

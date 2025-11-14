@@ -25,6 +25,7 @@
 
         <!-- Other activities -->
         <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.FeedActivity" />
         <activity android:name=".activities.LostFeedActivity" />

@@ -2,63 +2,90 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/niceback">
+    android:background="@drawable/niceback"
+    android:padding="16dp">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imgItemDetail"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_camera_placeholder"/>
+            android:src="@drawable/ic_camera_placeholder" />
 
         <TextView
             android:id="@+id/tvTitleDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Title"
-            android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="12dp"/>
+            android:textSize="22sp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvCategoryDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Category"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvLocationDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Location"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvDateDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvDescriptionDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvContactDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Contact"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black" />
+
+        <!-- ✅ Added new status field -->
+        <TextView
+            android:id="@+id/tvStatusDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: Not Returned"
+            android:textStyle="italic"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/holo_orange_dark" />
+
+        <!-- Existing Mark as Returned button -->
+        <Button
+            android:id="@+id/btnMarkReturned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mark as Returned"
+            android:background="#004D99"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp" />
+
     </LinearLayout>
 </ScrollView>

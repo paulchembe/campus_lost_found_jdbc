@@ -28,5 +28,24 @@ public class FeedActivity extends AppCompatActivity {
             Intent intent = new Intent(this, FoundFeedActivity.class);
             startActivity(intent);
         });
+
+        // Navigate directly to Item Details (example item)
+        Button btnItemDetails = findViewById(R.id.btnItemDetails);
+        btnItemDetails.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ItemDetailsActivity.class);
+
+            // Pass example item details (Option 2: fields individually)
+            intent.putExtra("item_id", 1);
+            intent.putExtra("title", "Sample Item");
+            intent.putExtra("category", "Wallet");
+            intent.putExtra("location", "Library");
+            intent.putExtra("date", "13/11/2025");
+            intent.putExtra("description", "A sample lost wallet for demo purposes.");
+            intent.putExtra("contact", "+260 123 456 789");
+            intent.putExtra("photoUri", ""); // can put a URL if available
+            intent.putExtra("status", "Not Returned");
+
+            startActivity(intent);
+        });
     }
 }
